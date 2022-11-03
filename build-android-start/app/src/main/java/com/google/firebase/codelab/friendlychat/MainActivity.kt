@@ -65,11 +65,12 @@ class MainActivity : AppCompatActivity() {
         // "10.0.2.2" is a special IP address which allows the Android Emulator
         // to connect to "localhost" on the host computer. The port values (9xxx)
         // must match the values defined in the firebase.json file.
-        if (BuildConfig.DEBUG) {
-            Firebase.database.useEmulator("10.0.2.2", 9000)
-            Firebase.auth.useEmulator("10.0.2.2", 9099)
-            Firebase.storage.useEmulator("10.0.2.2", 9199)
-        }
+
+//        if (BuildConfig.DEBUG) {
+//            Firebase.database.useEmulator("10.0.2.2", 9000)
+//            Firebase.auth.useEmulator("10.0.2.2", 9099)
+//            Firebase.storage.useEmulator("10.0.2.2", 9199)
+//        }
 
 
         // Initialize Firebase Auth and check if the user is signed in
@@ -92,10 +93,12 @@ class MainActivity : AppCompatActivity() {
             .setQuery(messagesRef, FriendlyMessage::class.java)
             .build()
         adapter = FriendlyMessageAdapter(options, getUserName())
+        // adapter.notifyDataSetChanged()
         binding.progressBar.visibility = ProgressBar.INVISIBLE
         manager = LinearLayoutManager(this)
         manager.stackFromEnd = true
         binding.messageRecyclerView.layoutManager = manager
+        binding.messageRecyclerView.itemAnimator = null
         binding.messageRecyclerView.adapter = adapter
 
         // Scroll down when a new message arrives
